@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
+from tkinter import messagebox
 
 class Login_window:
     def __init__(self,root):
@@ -54,19 +55,31 @@ class Login_window:
 
 # loginButton
 
-        loginbtn=Button(frame,text="Login",font=("times new roman",15,"bold"),bd=3,relief=RIDGE,fg="white",bg="red",activeforeground="white",activebackground="red")
+        loginbtn=Button(frame,command=self.login,text="Login",font=("times new roman",15,"bold"),bd=3,relief=RIDGE,fg="white",bg="red",activeforeground="white",activebackground="red")
         loginbtn.place(x=110,y=300,width=120,height=35)
 
-        #registerButton
-        registerbtn=Button(frame,text="New User Register",font=("times new roman",15,"bold"),borderwidth=0,fg="white",bg="red")
-        registerbtn.place(x=20,y=350,width=160)
+
+# registerButton
+        registerbtn = Button(frame, text="New User Register", font=("times new roman", 10, "bold"),
+                     borderwidth=0, fg="white", bg="black",
+                     activeforeground="white", activebackground="black")
+        registerbtn.place(x=20, y=350, width=160)
+
+# forgetpassbtn
+        forgetpassbtn = Button(frame, text="Forget Password", font=("times new roman", 10, "bold"),
+                       borderwidth=0, fg="white", bg="black",
+                       activeforeground="white", activebackground="black")
+        forgetpassbtn.place(x=10, y=370, width=160)
 
 
-        #forgetpassbtn
-        registerbtn=Button(frame,text="Forget Password",font=("times new roman",15,"bold"),borderwidth=0,fg="white",bg="red")
-        registerbtn.place(x=20,y=350,width=160)
 
-
+    def login(self):
+      if self.txtuser.get() == "" or self.txtpass.get() == "":
+          messagebox.showerror("Error", "All fields are required")
+      elif self.txtuser.get() == "admin" and self.txtpass.get() == "admin":
+          messagebox.showinfo("Success", "Login Successful")
+      else:
+          messagebox.showerror("Error", "Invalid username or password")
 
 if __name__ == "__main__":
     root = Tk()
